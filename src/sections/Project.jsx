@@ -1,8 +1,6 @@
 // src/sections/Project.jsx
 import React, { useEffect, useState } from "react";
 import { Github } from "lucide-react";
-import test from "../assets/test.jpg";
-import Kai from "../assets/kai.png";
 
 // Komponen teks gradasi
 const ShinyText = ({ text, className }) => (
@@ -26,28 +24,28 @@ const Project = () => {
     {
       id: 1,
       title: "KAI",
-      image: Kai,
+      image: "/assets/kai.png", // path ke public
       link: "https://www.figma.com/proto/GEohNFHpMEB3Zv7YevLO8B/KAI?node-id=41-3",
       techStack: ["Figma"],
     },
     {
       id: 2,
       title: "Student Absention",
-      image: test,
+      image: "/assets/test.jpg",
       link: "https://github.com/Rifandiysf/CRUD-MERN-Stack.git",
       techStack: ["MySQL", "Express.js", "React.js", "Node.js", "TailwindCSS"],
     },
     {
       id: 3,
       title: "Conseling Guidance",
-      image: test,
+      image: "/assets/test.jpg",
       link: "https://github.com/Rifandiysf/Conseling-Guidance-Apps.git",
       techStack: ["Laravel", "React.js"],
     },
     {
       id: 4,
       title: "Conseling Guidance 2",
-      image: test,
+      image: "/assets/test.jpg",
       link: "https://github.com/Rifandiysf/Conseling-Guidance-Apps.git",
       techStack: ["Laravel", "React.js"],
     },
@@ -97,16 +95,11 @@ const ProjectCard = ({ title, image, link, techStack }) => {
           className="w-full h-48 sm:h-56 md:h-64 object-cover"
         />
         <div
-          className={`absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-center justify-center text-white opacity-0 transition-opacity duration-300 ${
-            isHovered ? "opacity-100" : ""
-          }`}
+          className={`absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-center justify-center text-white opacity-0 transition-opacity duration-300 ${isHovered ? "opacity-100" : ""}`}
         >
           <div className="flex flex-wrap justify-center gap-2 px-4">
             {techStack.map((tech, index) => (
-              <span
-                key={index}
-                className="bg-black/60 px-2 py-1 rounded text-xs font-medium"
-              >
+              <span key={index} className="bg-black/60 px-2 py-1 rounded text-xs font-medium">
                 {tech}
               </span>
             ))}
