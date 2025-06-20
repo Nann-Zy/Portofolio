@@ -24,7 +24,7 @@ const Project = () => {
     {
       id: 1,
       title: "KAI",
-      image: "/assets/kai.png", // path ke public
+      image: "/assets/kai.png",  // <-- dari public/assets
       link: "https://www.figma.com/proto/GEohNFHpMEB3Zv7YevLO8B/KAI?node-id=41-3",
       techStack: ["Figma"],
     },
