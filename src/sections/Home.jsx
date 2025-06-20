@@ -53,7 +53,7 @@ const Home = () => {
     },
     {
       name: "GitHub",
-      link: "https://github.com/yourusername",
+      link: "https://github.com/Nann-Zy",
       icon: <Github size={20} />,
     },
     {

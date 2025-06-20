@@ -66,7 +66,7 @@ const Project = () => {
 
       <div className="flex justify-center mt-4">
         <a
-          href="https://github.com/Rifandiysf"
+          href="https://github.com/Nann-Zy"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 bg-black text-white px-5 py-2 rounded-full hover:scale-105 transition text-sm"
