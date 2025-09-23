@@ -129,7 +129,7 @@ const Home = () => {
                   onClick={() => setSelectedImage(project.image)}
                   className="w-full max-w-lg rounded-lg border border-slate-700 shadow-md cursor-pointer transition hover:scale-[1.02] hover:border-teal-300"
                 />
-                {/* Detail */}
+                {/* Judul link */}
                 <a
                   href={project.link}
                   target="_blank"
@@ -138,7 +138,19 @@ const Home = () => {
                 >
                   {project.name}
                 </a>
+                {/* Deskripsi */}
                 <p className="mt-2 text-lg text-slate-400">{project.desc}</p>
+                {/* Link tambahan di bawah deskripsi */}
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-teal-400 hover:underline mt-1 inline-block"
+                  >
+                    Preview Figma →
+                  </a>
+                )}
               </div>
             ))}
           </section>
