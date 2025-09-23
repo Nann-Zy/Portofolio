@@ -1,125 +1,146 @@
-// src/sections/Project.jsx
-import React, { useEffect, useState } from "react";
-import { Github } from "lucide-react";
+"use client";
 
-// Komponen teks gradasi
-const ShinyText = ({ text, className }) => (
-  <span className={`bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text ${className}`}>
-    {text}
-  </span>
-);
+import { Github, Linkedin, Mail, Phone } from "lucide-react";
+
+const sections = [
+  { name: "Home", href: "/" },
+  { name: "Projects", href: "#projects" },
+];
+
+const socialMedia = [
+  { name: "GitHub", link: "https://github.com/Nann-Zy", icon: <Github size={26} /> },
+  { name: "LinkedIn", link: "https://www.linkedin.com/in/yourusername", icon: <Linkedin size={26} /> },
+  { name: "WhatsApp", link: "https://wa.me/+6281220995629", icon: <Phone size={26} /> },
+  { name: "Gmail", link: "mailto:anandaputtra270608@gmail.com", icon: <Mail size={26} /> },
+];
+
+const projects = [
+  {
+    name: "Spotify Profile",
+    desc: "Web app untuk visualisasi data Spotify pribadi. Lihat top artist, track, playlist, dan rekomendasi.",
+    link: "https://github.com/Nann-Zy/spotify-profile",
+    tech: ["React", "Express", "Spotify API"],
+    image: "https://raw.githubusercontent.com/Nann-Zy/spotify-profile/main/public/preview.png",
+  },
+  {
+    name: "Landing Page UMKM",
+    desc: "Landing page modern untuk UMKM lokal dengan fitur galeri dan kontak.",
+    link: "https://github.com/Nann-Zy/umkm-landing",
+    tech: ["React", "Tailwind CSS"],
+    image: "https://raw.githubusercontent.com/Nann-Zy/umkm-landing/main/public/preview.png",
+  },
+];
 
 const Project = () => {
-  const [windowWidth, setWindowWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 1200
-  );
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const projects = [
-    {
-      id: 1,
-      title: "KAI",
-      image: "/assets/kai.png",  // <-- dari public/assets
-      link: "https://www.figma.com/proto/GEohNFHpMEB3Zv7YevLO8B/KAI?node-id=41-3",
-      techStack: ["Figma"],
-    },
-    {
-      id: 2,
-      title: "Student Absention",
-      image: "/assets/test.jpg",
-      link: "https://github.com/Rifandiysf/CRUD-MERN-Stack.git",
-      techStack: ["MySQL", "Express.js", "React.js", "Node.js", "TailwindCSS"],
-    },
-    {
-      id: 3,
-      title: "Conseling Guidance",
-      image: "/assets/test.jpg",
-      link: "https://github.com/Rifandiysf/Conseling-Guidance-Apps.git",
-      techStack: ["Laravel", "React.js"],
-    },
-    {
-      id: 4,
-      title: "Conseling Guidance 2",
-      image: "/assets/test.jpg",
-      link: "https://github.com/Rifandiysf/Conseling-Guidance-Apps.git",
-      techStack: ["Laravel", "React.js"],
-    },
-  ];
-
   return (
-    <section id="projects" className="flex flex-col py-16 px-4 gap-10">
-      <ShinyText
-        text="My Project"
-        className="font-semibold text-2xl max-sm:text-xl text-center"
-      />
+    <div className="bg-slate-900 min-h-screen text-slate-400 flex justify-center">
+      <div className="w-full flex flex-col lg:flex-row px-6 py-12 md:px-12 md:py-16 lg:py-0">
+        {/* Sidebar kiri */}
+        <aside className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[40%] lg:flex-col lg:justify-between lg:py-24">
+          <div>
+            <h1 className="text-5xl font-bold tracking-tight text-slate-200 sm:text-6xl">
+              <a href="/" className="hover:text-teal-300 transition-colors">
+                Ananda Puttra
+              </a>
+            </h1>
+            <h2 className="mt-4 text-2xl font-medium tracking-tight text-slate-200 sm:text-3xl">
+              Front End Developer & UI/UX Designer
+            </h2>
+            <p className="mt-6 max-w-sm text-lg leading-relaxed">
+              Berikut adalah beberapa project yang pernah saya buat.
+            </p>
 
-      <div className="grid grid-cols-2 gap-6 max-sm:grid-cols-1">
-        {projects.map((project) => (
-          <ProjectCard key={project.id} {...project} />
-        ))}
-      </div>
-
-      <div className="flex justify-center mt-4">
-        <a
-          href="https://github.com/Nann-Zy"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 bg-black text-white px-5 py-2 rounded-full hover:scale-105 transition text-sm"
-        >
-          <Github size={16} />
-          <p className="font-medium">More Projects on GitHub</p>
-        </a>
-      </div>
-    </section>
-  );
-};
-
-const ProjectCard = ({ title, image, link, techStack }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <div className="flex flex-col">
-      <div
-        className="rounded-lg overflow-hidden relative shadow-md cursor-pointer group mb-3"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-48 sm:h-56 md:h-64 object-cover"
-        />
-        <div
-          className={`absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-center justify-center text-white opacity-0 transition-opacity duration-300 ${isHovered ? "opacity-100" : ""}`}
-        >
-          <div className="flex flex-wrap justify-center gap-2 px-4">
-            {techStack.map((tech, index) => (
-              <span key={index} className="bg-black/60 px-2 py-1 rounded text-xs font-medium">
-                {tech}
-              </span>
-            ))}
+            {/* Navbar */}
+            <nav className="hidden lg:block mt-16">
+              <ul className="w-max">
+                {sections.map((section) => (
+                  <li key={section.name}>
+                    <a className="group flex items-center py-3" href={section.href}>
+                      <span className="mr-4 h-px w-10 bg-slate-600 transition-all group-hover:w-20 group-hover:bg-teal-300"></span>
+                      <span className="text-sm font-bold uppercase tracking-widest text-slate-500 group-hover:text-teal-300">
+                        {section.name}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
-        </div>
-      </div>
 
-      <div className="mt-1">
-        <h2 className="text-base sm:text-lg font-semibold">{title}</h2>
-      </div>
+          {/* Social media */}
+          <ul className="ml-1 mt-10 flex items-center">
+            {socialMedia.map((item) => (
+              <li key={item.name} className="mr-6">
+                <a
+                  className="block hover:text-teal-300 transition-colors"
+                  href={item.link}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label={item.name}
+                >
+                  {item.icon}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </aside>
 
-      <div className="mt-2">
-        <a
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block w-full text-center bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-1.5 rounded-md transition"
-        >
-          View Project
-        </a>
+        {/* Konten kanan */}
+        <main id="projects" className="pt-24 lg:w-[60%] lg:py-24">
+          <section className="mb-20 lg:mb-40 scroll-mt-20">
+            <h2 className="text-base font-bold uppercase tracking-widest text-slate-200 mb-6">Project Archive</h2>
+            {projects.map((project) => (
+              <div
+                key={project.name}
+                className="mb-14 group grid gap-6 sm:grid-cols-8 sm:gap-10"
+              >
+                {/* Gambar project */}
+                <div className="sm:col-span-3">
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    className="rounded-lg border border-slate-700 object-cover w-full h-auto transition group-hover:border-teal-300"
+                  />
+                </div>
+
+                {/* Detail project */}
+                <div className="sm:col-span-5">
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-2xl font-semibold text-slate-200 hover:text-teal-300 transition-colors"
+                  >
+                    {project.name}
+                  </a>
+                  <p className="mt-3 text-lg text-slate-400">{project.desc}</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {project.tech.map((tech) => (
+                      <span key={tech} className="px-3 py-1 rounded-full bg-teal-400/10 text-sm text-teal-300 font-medium">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </section>
+
+          {/* FOOTER */}
+          <footer className="max-w-lg pb-20 text-base text-slate-500">
+            <p>
+              Dibuat dengan{" "}
+              <a href="https://react.dev" className="underline">
+                React
+              </a>{" "}
+              dan{" "}
+              <a href="https://tailwindcss.com" className="underline">
+                Tailwind CSS
+              </a>
+              .
+            </p>
+          </footer>
+        </main>
       </div>
     </div>
   );
