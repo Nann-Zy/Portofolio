@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Github, Mail, Phone, X } from "lucide-react";
 
 const sections = [
@@ -49,6 +49,69 @@ const featuredProjects = [
 
 const Home = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [activeSection, setActiveSection] = useState("about");
+
+  // Smooth scroll function
+  const handleSmoothScroll = (e, href) => {
+    e.preventDefault();
+    const targetId = href.replace("#", "");
+    const targetElement = document.getElementById(targetId);
+    
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  };
+
+  // Intersection Observer untuk detect section aktif - FIXED VERSION
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-10% 0px -80% 0px", // Lebih sensitif untuk perubahan
+      threshold: 0
+    };
+
+    const observerCallback = (entries) => {
+      // Cari entry yang paling dekat dengan atas viewport
+      const visibleEntries = entries.filter(entry => entry.isIntersecting);
+      
+      if (visibleEntries.length > 0) {
+        // Urutkan berdasarkan posisi relative ke viewport
+        visibleEntries.sort((a, b) => {
+          const aRect = a.boundingClientRect;
+          const bRect = b.boundingClientRect;
+          return aRect.top - bRect.top; // Yang paling dekat dengan atas
+        });
+        
+        // Ambil section yang paling dekat dengan atas viewport
+        const closestSection = visibleEntries[0];
+        setActiveSection(closestSection.target.id);
+      }
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe semua sections
+    sections.forEach(section => {
+      const targetId = section.href.replace("#", "");
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        observer.observe(targetElement);
+      }
+    });
+
+    return () => {
+      sections.forEach(section => {
+        const targetId = section.href.replace("#", "");
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          observer.unobserve(targetElement);
+        }
+      });
+    };
+  }, []);
 
   return (
     <div className="bg-slate-900 min-h-screen font-sans text-slate-400 antialiased flex justify-center">
@@ -73,9 +136,23 @@ const Home = () => {
               <ul className="w-max">
                 {sections.map((section) => (
                   <li key={section.name}>
-                    <a className="group flex items-center py-3" href={section.href}>
-                      <span className="mr-4 h-px w-10 bg-slate-600 transition-all group-hover:w-20 group-hover:bg-teal-300"></span>
-                      <span className="text-sm font-bold uppercase tracking-widest text-slate-500 group-hover:text-teal-300">
+                    <a 
+                      className={`group flex items-center py-3 transition-all duration-300 ${
+                        activeSection === section.href.replace("#", "") 
+                          ? "text-teal-300" 
+                          : "text-slate-500"
+                      }`}
+                      href={section.href}
+                      onClick={(e) => handleSmoothScroll(e, section.href)}
+                    >
+                      <span 
+                        className={`mr-4 h-px w-10 transition-all duration-300 ${
+                          activeSection === section.href.replace("#", "") 
+                            ? "w-20 bg-teal-300" 
+                            : "bg-slate-600 group-hover:w-20 group-hover:bg-teal-300"
+                        }`}
+                      ></span>
+                      <span className="text-sm font-bold uppercase tracking-widest group-hover:text-teal-300">
                         {section.name}
                       </span>
                     </a>
@@ -107,7 +184,10 @@ const Home = () => {
         {/* Konten kanan */}
         <main id="content" className="pt-24 lg:w-[60%] lg:py-24">
           {/* ABOUT */}
-          <section id="about" className="mb-20 lg:mb-40 scroll-mt-20">
+          <section 
+            id="about" 
+            className="mb-20 lg:mb-40 scroll-mt-20 transition-all duration-500"
+          >
             <h2 className="text-base font-bold uppercase tracking-widest text-slate-200 mb-6">About</h2>
             <p className="mb-6 text-xl leading-relaxed">
               Saya seorang junior UI/UX designer yang sedang belajar membuat antarmuka pengguna sederhana, mudah dipahami, dan ramah pengguna. Fokus saya pada pengembangan keterampilan desain serta memahami kebutuhan pengguna.
@@ -118,7 +198,10 @@ const Home = () => {
           </section>
 
           {/* PROJECTS */}
-          <section id="projects" className="mb-20 lg:mb-40 scroll-mt-20">
+          <section 
+            id="projects" 
+            className="mb-20 lg:mb-40 scroll-mt-20 transition-all duration-500"
+          >
             <h2 className="text-base font-bold uppercase tracking-widest text-slate-200 mb-6">Projects</h2>
             {featuredProjects.map((project) => (
               <div key={project.name} className="mb-12 group">
@@ -168,7 +251,7 @@ const Home = () => {
       {selectedImage && (
         <div
           className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
-          onClick={() => setSelectedImage(null)} // klik luar modal = close
+          onClick={() => setSelectedImage(null)}
         >
           <div className="relative" onClick={(e) => e.stopPropagation()}>
             <button
