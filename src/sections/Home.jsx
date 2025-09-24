@@ -34,10 +34,10 @@ const featuredProjects = [
     image: "/assets/Hubin.png",
   },
   {
-    name: "Coming Soon",
-    desc: "",
-    link: "",
-    image: "/assets/coming soon.png",
+    name: "On Progress - 20% ",
+    desc: "WeatherApp mobile ",
+    link: "https://www.figma.com/design/Ri0GmFHYWizsQRFF3GakYS/CUACA-APP--20-?node-id=0-1&t=q3Sjt1SSChiQ5qtn-1",
+    image: "/assets/CuacaApp.png",
   },
   {
     name: "Coming Soon",
