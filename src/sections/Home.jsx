@@ -40,8 +40,14 @@ const featuredProjects = [
     image: "/assets/cuaca.png",
   },
   {
-    name: "Coming Soon",
-    desc: "",
+    name: "Ardan Mobile",
+    desc: "Mobile App, aplikasi Radio Ardan Radio ",
+    link: "https://www.figma.com/design/tPK02qNx0pFcBr5ftUXQOC/Mockup-Ardan?node-id=0-1&p=f&t=eZ7MRu8nrsuV4xiv-0",
+    image: "/assets/Ardan.png",
+  },
+   {
+    name: "Coming soon",
+    desc: "Coming soon ",
     link: "",
     image: "/assets/coming soon.png",
   },
