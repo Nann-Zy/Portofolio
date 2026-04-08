@@ -9,7 +9,7 @@ const sections = [
 
 const socialMedia = [
   { name: "GitHub", link: "https://github.com/Nann-Zy", icon: <Github size={26} /> },
-  { name: "LinkedIn", link: "https://www.linkedin.com/in/yourusername", icon: <Linkedin size={26} /> },
+  { name: "LinkedIn", link: "https://www.linkedin.com/in/ananda-puttra", icon: <Linkedin size={26} /> },
   { name: "WhatsApp", link: "https://wa.me/+6281220995629", icon: <Phone size={26} /> },
   { name: "Gmail", link: "mailto:anandaputtra270608@gmail.com", icon: <Mail size={26} /> },
 ];
@@ -44,7 +44,7 @@ const Project = () => {
               </a>
             </h1>
             <h2 className="mt-4 text-2xl font-medium tracking-tight text-slate-200 sm:text-3xl">
-              Front End Developer & UI/UX Designer
+              UI/UX Designer
             </h2>
             <p className="mt-6 max-w-sm text-lg leading-relaxed">
               Berikut adalah beberapa project yang pernah saya buat.

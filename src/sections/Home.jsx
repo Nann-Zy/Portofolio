@@ -1,17 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Github, Mail, Phone, X } from "lucide-react";
+import { Github, Mail, Phone, Linkedin, X} from "lucide-react";
 
 const sections = [
   { name: "About", href: "#about" },
   { name: "Projects", href: "#projects" },
+
 ];
 
 const socialMedia = [
   { name: "GitHub", link: "https://github.com/Nann-Zy", icon: <Github size={26} /> },
   { name: "WhatsApp", link: "https://wa.me/+6281220995629", icon: <Phone size={26} /> },
   { name: "Gmail", link: "mailto:anandaputtra270608@gmail.com", icon: <Mail size={26} /> },
+  { name: "LinkedIn", link: "https://www.linkedin.com/in/ananda-puttra-806458338/", icon: <Linkedin size={26} /> },
 ];
 
 const featuredProjects = [
